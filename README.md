@@ -22,4 +22,6 @@ To install the plugin, follow these instructions.
 
 ## Configuring ManageCraft
 
-To secure access to the available CMS and plugin updates, enter an Access Key in the plugin's settings.
+This plugin makes information relating to Craft and installed plugins available at yoursite.com/actions/manage-craft.
+
+You probably don't want this information to be publicly accessible. To secure this endpoint, enter an Access Key in the plugin's settings.
