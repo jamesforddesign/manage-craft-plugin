@@ -1,8 +1,6 @@
 # ManageCraft plugin for Craft CMS 3.x
 
-This is a description
-
-![Screenshot](resources/img/plugin-logo.png)
+Provides access to available CMS and plugin updates.
 
 ## Requirements
 
@@ -22,22 +20,6 @@ To install the plugin, follow these instructions.
 
 3. In the Control Panel, go to Settings → Plugins and click the “Install” button for ManageCraft.
 
-## ManageCraft Overview
-
--Insert text here-
-
 ## Configuring ManageCraft
 
--Insert text here-
-
-## Using ManageCraft
-
--Insert text here-
-
-## ManageCraft Roadmap
-
-Some things to do, and ideas for potential features:
-
-* Release it
-
-Brought to you by [JFD](https://jfd.co.uk)
+To secure access to the available CMS and plugin updates, enter an Access Key in the plugin's settings.
