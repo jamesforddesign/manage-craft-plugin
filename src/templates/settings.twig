@@ -1,0 +1,26 @@
+{# @var craft \craft\web\twig\variables\CraftVariable #}
+{#
+/**
+ * ManageCraft plugin for Craft CMS 3.x
+ *
+ * ManageCraft Settings.twig
+ *
+ * @author    JFD
+ * @copyright Copyright (c) 2019 JFD
+ * @link      https://jfd.co.uk
+ * @package   ManageCraft
+ * @since     1.0.0
+ */
+#}
+
+{% import "_includes/forms" as forms %}
+
+{% do view.registerAssetBundle("jfd\\managecraft\\assetbundles\\managecraft\\ManageCraftAsset") %}
+
+{{ forms.textField({
+    label: 'Access Key',
+    instructions: 'Secure your endpoint with an access key. Make it nice and long!',
+    id: 'accessKey',
+    name: 'accessKey',
+    value: settings['accessKey']})
+}}

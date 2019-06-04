@@ -1,0 +1,40 @@
+{
+    "name": "jfd/manage-craft",
+    "description": "This is a description",
+    "type": "craft-plugin",
+    "version": "1.0.0",
+    "keywords": [
+        "craft",
+        "cms",
+        "craftcms",
+        "craft-plugin",
+        "managecraft"
+    ],
+    "support": {
+        "docs": "https://github.com/jamesforddesign/manage-craft/blob/master/README.md",
+        "issues": "https://github.com/jamesforddesign/manage-craft/issues"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "JFD",
+            "homepage": "https://jfd.co.uk"
+        }
+    ],
+    "require": {
+        "craftcms/cms": "^3.0.0-RC1"
+    },
+    "autoload": {
+        "psr-4": {
+          "jfd\\managecraft\\": "src/"
+        }
+    },
+    "extra": {
+        "name": "ManageCraft",
+        "handle": "manage-craft",
+        "hasCpSettings": true,
+        "hasCpSection": false,
+        "changelogUrl": "https://raw.githubusercontent.com/jamesforddesign/manage-craft/master/CHANGELOG.md",
+        "class": "jfd\\managecraft\\ManageCraft"
+    }
+}
