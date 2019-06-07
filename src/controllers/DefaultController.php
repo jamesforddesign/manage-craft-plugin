@@ -58,23 +58,20 @@ class DefaultController extends Controller
         // Get updates (force refresh)
         $updates = Craft::$app->getUpdates()->getUpdates($forceRefresh);
 
-        $res = [
-            'total' => $updates->getTotal(),
-            'critical' => $updates->getHasCritical()
-        ];
+        $res = [];
 
-        $res['updates'] = [
-            'cms' => $this->_transformUpdate($allowUpdates, $updates->cms, 'craft', 'Craft CMS'),
-            'plugins' => [],
-        ];
-            
+        $res['cms'] = $this->_transformUpdate($allowUpdates, $updates->cms, 'craft', 'Craft CMS', Craft::$app->getVersion());
+        $res['plugins'] = [];
+
         $pluginsService = Craft::$app->getPlugins();
-            
+
         foreach ($updates->plugins as $handle => $update) {
-            if (($plugin = $pluginsService->getPlugin($handle)) !== null) {
-                
-                if($update->hasReleases) {
-                    $res['updates']['plugins'][] = $this->_transformUpdate($allowUpdates, $update, $handle, $plugin->name);
+            $plugin = $pluginsService->getPlugin($handle);
+
+            if ($plugin !== null) {
+
+                if ($update->hasReleases) {
+                    $res['plugins'][] = $this->_transformUpdate($allowUpdates, $update, $handle, $plugin->name, $plugin->version);
                 }
             }
         }
@@ -90,16 +87,17 @@ class DefaultController extends Controller
         $headers = Craft::$app->request->headers;
         $auth = $headers->get('Access-Key');
         if ($auth !== $accessKey) {
-          throw new BadRequestHttpException('Invalid access key.');
+            throw new BadRequestHttpException('Invalid access key.');
         }
     }
 
-    private function _transformUpdate(bool $allowUpdates, Update $update, string $handle, string $name): array
+    private function _transformUpdate(bool $allowUpdates, Update $update, string $handle, string $name, string $currentVersion): array
     {
         $arr = $update->toArray();
-        
+
         $arr['handle'] = $handle;
         $arr['name'] = $name;
+        $arr['currentVersion'] = $currentVersion;
         $arr['latestVersion'] = $update->getLatest()->version ?? null;
 
         if ($update->status === Update::STATUS_EXPIRED) {
@@ -113,19 +111,17 @@ class DefaultController extends Controller
             ]);
 
             $arr['ctaUrl'] = UrlHelper::url($update->renewalUrl);
-
         } else {
 
             if ($update->status === Update::STATUS_BREAKPOINT) {
                 $arr['statusText'] = Craft::t('app', '<strong>You’ve reached a breakpoint!</strong> More updates will become available after you install {update}.</p>', [
-                    'update' => $name.' '.($update->getLatest()->version ?? '')
+                    'update' => $name . ' ' . ($update->getLatest()->version ?? '')
                 ]);
             }
 
             if ($allowUpdates) {
                 $arr['ctaText'] = Craft::t('app', 'Update');
             }
-
         }
 
         return $arr;
