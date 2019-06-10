@@ -1,6 +1,6 @@
 {
     "name": "jfd/manage-craft",
-    "description": "This is a description",
+    "description": "Provides access to available CMS and plugin updates.",
     "type": "craft-plugin",
     "version": "1.0.0",
     "keywords": [
@@ -26,7 +26,7 @@
     },
     "autoload": {
         "psr-4": {
-          "jfd\\managecraft\\": "src/"
+            "jfd\\managecraft\\": "src/"
         }
     },
     "extra": {
