@@ -2,7 +2,7 @@
 /**
  * ManageCraft plugin for Craft CMS 3.x
  *
- * This is a description
+ * Expose info about available Craft CMS and plugin updates
  *
  * @link      https://jfd.co.uk
  * @copyright Copyright (c) 2019 JFD
@@ -62,8 +62,7 @@ class ManageCraft extends Plugin
             Plugins::class,
             Plugins::EVENT_AFTER_INSTALL_PLUGIN,
             function (PluginEvent $event) {
-                if ($event->plugin === $this) {
-                }
+                if ($event->plugin === $this) { }
             }
         );
 
